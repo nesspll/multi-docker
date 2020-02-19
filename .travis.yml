@@ -18,4 +18,17 @@ after_success:
     - docker push nesspll/multi-client 
     - docker push nesspll/multi-worker 
     - docker push nesspll/multi-server 
-    - docker push nesspll/multi-nginx 
+    - docker push nesspll/multi-nginx
+
+deploy:
+    edge: true
+    provider: elasticbeanstalk
+    region: "us-west-2"
+    app: "multi-docker"
+    env: "MultiDocker-env"
+    bucket_name: elasticbeanstalk-us-west-2-568283627415
+    bucket_path: docker-multi
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
